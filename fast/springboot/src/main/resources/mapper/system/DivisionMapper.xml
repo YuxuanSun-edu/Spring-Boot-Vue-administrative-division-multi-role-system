@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fast.system.mapper.DivisionMapper">
+
+    <resultMap type="com.fast.system.domain.Division" id="DivisionResult">
+        <id     property="id"           column="id"        />
+        <result property="divCode"      column="div_code"  />
+        <result property="divName"      column="div_name"  />
+        <result property="manager"      column="manager"   />
+        <result property="phone"        column="phone"     />
+        <result property="address"      column="address"   />
+        <result property="createBy"     column="create_by" />
+        <result property="createTime"   column="create_time"/>
+        <result property="updateBy"     column="update_by" />
+        <result property="updateTime"   column="update_time"/>
+    </resultMap>
+
+    <select id="selectDivisionList" parameterType="com.fast.system.domain.Division" resultMap="DivisionResult">
+        select * from sys_division
+        <where>
+            <if test="divName != null and divName != ''">
+                AND div_name like concat('%', #{divName}, '%')
+            </if>
+            <if test="divCode != null and divCode != ''">
+                AND div_code like concat('%', #{divCode}, '%')
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <insert id="insertDivision" parameterType="com.fast.system.domain.Division" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_division(
+            div_code, div_name, manager, phone, address, create_by, create_time
+        ) values (
+                     #{divCode}, #{divName}, #{manager}, #{phone}, #{address}, #{createBy}, sysdate()
+                 )
+    </insert>
+
+    <update id="updateDivision" parameterType="com.fast.system.domain.Division">
+        update sys_division
+        <set>
+            <if test="divCode != null">div_code = #{divCode},</if>
+            <if test="divName != null">div_name = #{divName},</if>
+            <if test="manager != null">manager = #{manager},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="address != null">address = #{address},</if>
+            update_by = #{updateBy},
+            update_time = sysdate()
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDivisionById" parameterType="Long">
+        delete from sys_division where id = #{id}
+    </delete>
+
+</mapper>

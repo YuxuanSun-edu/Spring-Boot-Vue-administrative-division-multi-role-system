@@ -1,0 +1,45 @@
+/* 全局重置 */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+  background-color: #f0f2f5; /* 经典的后台浅灰背景 */
+  color: #303133;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  height: 100%;
+}
+
+/* 统一输入框样式 */
+input, select {
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  height: 32px;
+  padding: 0 10px;
+  outline: none;
+  transition: border-color 0.2s;
+  color: #606266;
+}
+
+input:focus, select:focus {
+  border-color: #409EFF;
+}
+
+/* 统一按钮基础样式 */
+button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid transparent;
+  padding: 8px 15px;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: 0.1s;
+  font-weight: 500;
+}
